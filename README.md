@@ -14,11 +14,12 @@ Run the container with two volumes mounted at /decrypted and /encrypted and pass
 a password through the PASSWD environment variable. Make sure you
 add SYS\_ADMIN capabilities and /dev/fuse device:
 
-	sudo docker run -it -e PASSWD=badpass --name cryfs \
+	sudo docker run -it -d -e PASSWD=badpass --name cryfs \
 				-v /path/to/encrypted_data:/encrypted \
 				-v /path/to/place/decrypted_data:/decrypted:shared \
 				--device /dev/fuse:/dev/fuse \
-				--cap-add SYS_ADMIN
+				--cap-add SYS_ADMIN \
+				edyounis/cryfs
 
 or with docker-compose:
 
@@ -55,3 +56,10 @@ services:
 If you encounter any issues or have any questions with this image, please
 open a [GitHub issue](https://github.com/edyounis/docker-cryfs/issues).
 
+## Disclaimer
+
+The CryFS filesystem can become corrupted. Although this is rare and the
+developers are constantly improving the software, back up any important 
+data often. The common case is concurrent access from multiple locations.
+To quote the [website](https://www.cryfs.org/tutorial):
+> Warning!  Never access the file system from two devices at the same time. This can corrupt your file system. When switching devices, always make sure to stop CryFS on the first device, let Dropbox finish synchronization, and then start CryFS on the second device. There are some ideas on how future versions of CryFS could allow for concurrent access, but in the current version this is not safe.
