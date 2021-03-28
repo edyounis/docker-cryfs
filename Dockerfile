@@ -1,4 +1,5 @@
 FROM alpine:latest
+MAINTAINER Ed Younis <edyounis123@gmail.com>
 
 # Install CryFS
 ENV CRYFS_VERSION="develop"
