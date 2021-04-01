@@ -33,9 +33,9 @@ trap sighup_handler SIGHUP
 
 unset pid
 if [ ! -z "$PASSWD" ]; then
-	echo "${PASSWD}" | cryfs ${CRYFS_OPTIONS} -o ${MOUNT_OPTIONS} -f encrypted decrypted & pid=($!)
+	echo "${PASSWD}" | gosu cryfsuser cryfs ${CRYFS_OPTIONS} -o ${MOUNT_OPTIONS} -f encrypted decrypted & pid=($!)
 else
-	cryfs ${CRYFS_OPTIONS} -o ${MOUNT_OPTIONS} -f encrypted decrypted & pid=($!)
+	gosu cryfsuser cryfs ${CRYFS_OPTIONS} -o ${MOUNT_OPTIONS} -f encrypted decrypted & pid=($!)
 fi
 wait "${pid}"
 
