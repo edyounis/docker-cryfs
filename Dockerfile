@@ -5,7 +5,7 @@ MAINTAINER Ed Younis <edyounis123@gmail.com>
 ENV CRYFS_VERSION="develop"
 
 RUN apk --no-cache --no-progress upgrade && \
-    apk add --no-cache bash curl fuse libgomp libstdc++ openssl tini tzdata shadow && \
+    apk add --no-cache bash curl fuse libgomp libstdc++ openssl tini tzdata shadow su-exec && \
     addgroup -S cryfs && \
     adduser -S -D -H -h /tmp -s /sbin/nologin -G cryfs -g 'CryFS User' cryfsuser && \
     apk add --no-cache --virtual .build-deps cmake curl-dev fuse-dev g++ gcc git make openssl-dev py3-pip python3 && \
